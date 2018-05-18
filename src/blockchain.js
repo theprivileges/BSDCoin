@@ -1,7 +1,19 @@
 const Block = require('./block');
 const Transaction = require('./transaction');
 
+/**
+ * Blockchain definition
+ * @typedef {Blockchain} Blockchain
+ * @prop {Array} chain The current chain of valid blocks
+ * @prop {Number} difficulty The target difficulty, used to enforce proof-of-work
+ * @prop {Array} pendingTransactions List of Transactions yet to be mined
+ * @prop {Number} miningReward Reward given to miners for doing the work.
+ */
+
 module.exports = class Blockchain {
+    /**
+     * Create a Blockchain
+     */
     constructor() {
         this.chain = [this.createGenesisBlock()];
         this.difficulty = 3;
@@ -48,7 +60,7 @@ module.exports = class Blockchain {
      * Given a miner address, attempt to mine the pending transactions and adding a block to the blockchain.
      * This generates a new pending transaction rewarding the miner for their work.
      * 
-     * @param {string} miningRewardAddress 
+     * @param {String} miningRewardAddress 
      */
     minePendingTransactions(miningRewardAddress) {
         let block = new Block(Date.now(), this.pendingTransactions, this.getLatestBlock().hash);
@@ -72,20 +84,20 @@ module.exports = class Blockchain {
      * Calculate the balance of a given address by traversing all of the transactions
      * associated with the given address
      * 
-     * @param {string} address the public address in question
-     * @returns {string} the balance of a given address
+     * @param {String} address the public address in question
+     * @returns {String} the balance of a given address
      */
     getBalanceOfAddress(address) {
         let balance = 0;
 
         for (const block of this.chain) {
-            for (const trans of block.transactions) {
-                if (trans.fromAddress === address) {
-                    balance -= trans.amount;
+            for (const trans of block.getTransactions()) {
+                if (trans.getFromAddress() === address) {
+                    balance -= trans.getAmount();
                 }
 
-                if (trans.toAddress === address) {
-                    balance += trans.amount;
+                if (trans.getToAddress() === address) {
+                    balance += trans.getAmount();
                 }
             }
         }
@@ -97,23 +109,25 @@ module.exports = class Blockchain {
      * Calculates wheter or not the Blockchain has been tempered with by validating the hashs of each block on
      * the Blockchain
      * 
-     * @returns {boolean}
+     * @returns {Boolean}
      */
     isChainValid() {
+        const chainLenght = this.chain.length;
         // skip the genesis block
-        for (let i = 1; i < this.chain.length; i++) {
+        for (let i = 1; i < chainLenght; i++) {
             const currentBlock = this.chain[i];
             const previousBlock = this.chain[i - 1];
-
-            if (currentBlock.hash !== currentBlock.calculateHash()) {
+            
+            // test if current block has not been tempered with
+            if (currentBlock.getHash() !== currentBlock.calculateHash()) {
                 return false;
             }
-
-            if (currentBlock.previousHash !== previousBlock.hash) {
+            // check if current block links to the preview block
+            if (currentBlock.getPreviousHash() !== previousBlock.getHash()) {
                 return false;
             }
         }
-
+        // for our purpose this chain is said to be valid.
         return true;
     }
 }
