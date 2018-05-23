@@ -6,9 +6,9 @@ module.exports = class Transaction {
      * @param {Number} amount The amount spent in this transaction
      */
     constructor(fromAddress, toAddress, amount) {
-        this.fromAddress = fromAddress;
-        this.toAddress = toAddress;
-        this.amount = amount;
+        this.fromAddress = fromAddress.toString();
+        this.toAddress = toAddress.toString();
+        this.amount = amount.toString();
     }
 
     /**

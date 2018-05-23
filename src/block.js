@@ -8,8 +8,8 @@ module.exports = class Block {
      * @param {String} previousHash A reference to the hash of the previous (parent) block in the chain
      */
     constructor(timestamp = Date.now(), transactions = [], previousHash = '') {
-        this.previousHash = previousHash;
-        this.timestamp = timestamp;
+        this.previousHash = previousHash.toString();
+        this.timestamp = timestamp.toString();
         this.transactions = transactions;
         this.nonce = this.generateNonce()
         this.hash = this.calculateHash();

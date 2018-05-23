@@ -1,18 +1,14 @@
 const Block = require('./block');
 const Transaction = require('./transaction');
 
-/**
- * Blockchain definition
- * @typedef {Blockchain} Blockchain
- * @prop {Array} chain The current chain of valid blocks
- * @prop {Number} difficulty The target difficulty, used to enforce proof-of-work
- * @prop {Array} pendingTransactions List of Transactions yet to be mined
- * @prop {Number} miningReward Reward given to miners for doing the work.
- */
-
 module.exports = class Blockchain {
     /**
      * Create a Blockchain
+     * @typedef {Blockchain} Blockchain
+     * @prop {Array} chain The current chain of valid blocks
+     * @prop {Number} difficulty The target difficulty, used to enforce proof-of-work
+     * @prop {Array} pendingTransactions List of Transactions yet to be mined
+     * @prop {Number} miningReward Reward given to miners for doing the work.
      */
     constructor() {
         this.chain = [this.createGenesisBlock()];
@@ -67,7 +63,7 @@ module.exports = class Blockchain {
         block.mineBlock(this.difficulty);
         this.addBlock(block);
         this.resetPendingTransactions();
-        const reward = new Transaction(null, miningRewardAddress, this.miningReward)
+        const reward = new Transaction('', miningRewardAddress, this.miningReward)
         this.createTransaction(reward);
     }
 
