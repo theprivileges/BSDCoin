@@ -17,7 +17,7 @@ module.exports = class Block {
 
     /**
      * Generate the block's hash by building a sha256 hash combining all properties except the hash
-     * @return {String} HEX string of the data passed to be hashed
+     * @return {String} calculated digest of this block's properties
      */
     calculateHash() {
         const hash256 = crypto.createHash('sha256');
