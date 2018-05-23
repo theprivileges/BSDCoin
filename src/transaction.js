@@ -13,8 +13,8 @@ module.exports = class Transaction {
 
     /**
      * Get the amount spent in this transaction
-     * 
-     * @returns {Number}
+     *
+     * @return {Number}
      */
     getAmount() {
         return this.amount;
@@ -22,8 +22,8 @@ module.exports = class Transaction {
 
     /**
      * Get the output address for this transaction
-     * 
-     * @returns {String}
+     *
+     * @return {String}
      */
     getFromAddress() {
         return this.fromAddress;
@@ -31,10 +31,10 @@ module.exports = class Transaction {
 
     /**
      * Get the input address for this transaction
-     * 
-     * @returns {String}
+     *
+     * @return {String}
      */
     getToAddress() {
         return this.toAddress;
     }
-}
+};

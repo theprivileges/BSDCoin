@@ -19,17 +19,17 @@ module.exports = class Blockchain {
 
     /**
      * Generate the Genesis Block for this blockchain
-     * 
-     * @returns {Block} the genesis block
+     *
+     * @return {Block} the genesis block
      */
     createGenesisBlock() {
-        return new Block(Date.parse("2018-06-09"), [], "0");
+        return new Block(Date.parse('2018-06-09'), [], '0');
     }
 
     /**
      * Get the lastest block on this blockchain
-     * 
-     * @returns {Block} the last block on the blockchain
+     *
+     * @return {Block} the last block on the blockchain
      */
     getLatestBlock() {
         return this.chain[this.chain.length - 1];
@@ -37,8 +37,8 @@ module.exports = class Blockchain {
 
     /**
      * Push a new Block onto the end of the Blockchain
-     * 
-     * @param {Block} block 
+     *
+     * @param {Block} block
      */
     addBlock(block) {
         this.chain.push(block);
@@ -55,22 +55,22 @@ module.exports = class Blockchain {
     /**
      * Given a miner address, attempt to mine the pending transactions and adding a block to the blockchain.
      * This generates a new pending transaction rewarding the miner for their work.
-     * 
-     * @param {String} miningRewardAddress 
+     *
+     * @param {String} miningRewardAddress
      */
     minePendingTransactions(miningRewardAddress) {
         let block = new Block(Date.now(), this.pendingTransactions, this.getLatestBlock().hash);
         block.mineBlock(this.difficulty);
         this.addBlock(block);
         this.resetPendingTransactions();
-        const reward = new Transaction('', miningRewardAddress, this.miningReward)
+        const reward = new Transaction('', miningRewardAddress, this.miningReward);
         this.createTransaction(reward);
     }
 
     /**
      * Append a new Transaction to the list of pending transactions to be mined next.
-     * 
-     * @param {Transaction} transaction 
+     *
+     * @param {Transaction} transaction
      */
     createTransaction(transaction) {
         this.pendingTransactions.push(transaction);
@@ -79,9 +79,9 @@ module.exports = class Blockchain {
     /**
      * Calculate the balance of a given address by traversing all of the transactions
      * associated with the given address
-     * 
+     *
      * @param {String} address the public address in question
-     * @returns {String} the balance of a given address
+     * @return {String} the balance of a given address
      */
     getBalanceOfAddress(address) {
         let balance = 0;
@@ -104,8 +104,8 @@ module.exports = class Blockchain {
     /**
      * Calculates wheter or not the Blockchain has been tempered with by validating the hashs of each block on
      * the Blockchain
-     * 
-     * @returns {Boolean}
+     *
+     * @return {Boolean}
      */
     isChainValid() {
         const chainLenght = this.chain.length;
@@ -113,7 +113,7 @@ module.exports = class Blockchain {
         for (let i = 1; i < chainLenght; i++) {
             const currentBlock = this.chain[i];
             const previousBlock = this.chain[i - 1];
-            
+
             // test if current block has not been tempered with
             if (currentBlock.getHash() !== currentBlock.calculateHash()) {
                 return false;
@@ -126,4 +126,4 @@ module.exports = class Blockchain {
         // for our purpose this chain is said to be valid.
         return true;
     }
-}
+};
