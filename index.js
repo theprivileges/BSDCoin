@@ -12,5 +12,10 @@ bsdCoin.createTransaction(new Transaction('address2', 'address1', 50));
 bsdCoin.minePendingTransactions('miner-address');
 bsdCoin.minePendingTransactions('miner-address');
 
-console.log('Balance of miner-address  is', bsdCoin.getBalanceOfAddress('miner-address'));
+/**
+ * @var {String} minerBalance The balance of the miner-address
+ */
+const minerBalance = bsdCoin.getBalanceOfAddress('miner-address');
+
+console.log('Balance of miner-address  is', minerBalance);
 console.log('Blockchain', JSON.stringify(bsdCoin, null, 2));
