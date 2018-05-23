@@ -11,13 +11,13 @@ module.exports = class Block {
         this.previousHash = previousHash.toString();
         this.timestamp = timestamp;
         this.transactions = transactions;
-        this.nonce = this.generateNonce()
+        this.nonce = this.generateNonce();
         this.hash = this.calculateHash();
     }
 
     /**
      * Generate the block's hash by building a sha256 hash combining all properties except the hash
-     * @returns {String} HEX string of the data passed to be hashed
+     * @return {String} HEX string of the data passed to be hashed
      */
     calculateHash() {
         const hash256 = crypto.createHash('sha256');
@@ -30,17 +30,18 @@ module.exports = class Block {
 
     /**
      * Mine a block given a specified difficulty
-     * 
-     * @param {Number} difficulty 
+     *
+     * @param {Number} difficulty
      */
     mineBlock(difficulty) {
         console.time('Mining Block');
+        const target = Array(difficulty + 1).join('0');
         // While the hash does not begin with the specified leading zeroes, keep trying
-        while (this.hash.substring(0, difficulty) !== Array(difficulty + 1).join("0")) {
-            this.nonce = this.generateNonce()
+        while (this.hash.substring(0, difficulty) !== target) {
+            this.nonce = this.generateNonce();
             this.hash = this.calculateHash();
         }
-        console.log("BLOCK MINED: ", this.hash);
+        console.log('BLOCK MINED: ', this.hash);
         console.timeEnd('Mining Block');
     }
 
@@ -48,6 +49,7 @@ module.exports = class Block {
      * Generate a random value so that the hash of the block will contain a run of leading zeroes.
      *
      * @param {Number} length (optional) the bit size of the nonce
+     * @return {String}
      */
     generateNonce(length = 32) {
         return crypto.randomBytes(length).toString('hex');
@@ -55,8 +57,8 @@ module.exports = class Block {
 
     /**
      * Get the hash of the parent block
-     * 
-     * @returns {String}
+     *
+     * @return  {String}
      */
     getPreviousHash() {
         return this.previousHash;
@@ -64,8 +66,8 @@ module.exports = class Block {
 
     /**
      * Get the list of transactions in this block
-     * 
-     * @returns {Array}
+     *
+     * @return {Array}
      */
     getTransactions() {
         return this.transactions;
@@ -73,10 +75,10 @@ module.exports = class Block {
 
     /**
      * Get the hash of this block
-     * 
-     * @returns {String}
+     *
+     * @return {String}
      */
     getHash() {
         return this.hash;
     }
-}
+};
