@@ -9,7 +9,7 @@ module.exports = class Block {
      */
     constructor(timestamp = Date.now(), transactions = [], previousHash = '') {
         this.previousHash = previousHash.toString();
-        this.timestamp = timestamp.toString();
+        this.timestamp = timestamp;
         this.transactions = transactions;
         this.nonce = this.generateNonce()
         this.hash = this.calculateHash();
