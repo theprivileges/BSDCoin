@@ -8,7 +8,7 @@ module.exports = class Transaction {
     constructor(fromAddress, toAddress, amount) {
         this.fromAddress = fromAddress.toString();
         this.toAddress = toAddress.toString();
-        this.amount = amount.toString();
+        this.amount = Number(amount);
     }
 
     /**
