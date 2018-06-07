@@ -1,3 +1,7 @@
+/**
+ * @export
+ * @class Transaction
+ */
 module.exports = class Transaction {
     /**
      * Create a Transaction

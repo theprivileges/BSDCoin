@@ -1,13 +1,16 @@
 const Block = require('./block');
 const Transaction = require('./transaction');
 
+/**
+ * @export
+ * @class Blockchain
+ */
 module.exports = class Blockchain {
     /**
      * Create a Blockchain
-     * @typedef {Blockchain} Blockchain
-     * @prop {Array} chain The current chain of valid blocks
-     * @prop {Number} difficulty The target difficulty, used to enforce proof-of-work
-     * @prop {Array} pendingTransactions List of Transactions yet to be mined
+     * @prop {Array.<Block>} chain The current chain of valid blocks
+     * @prop {Number} [difficulty=3] The target difficulty, used to enforce proof-of-work
+     * @prop {Array.<Transaction>} pendingTransactions List of Transactions yet to be mined
      * @prop {Number} miningReward Reward given to miners for doing the work.
      */
     constructor() {
@@ -38,7 +41,7 @@ module.exports = class Blockchain {
     /**
      * Push a new Block onto the end of the Blockchain
      *
-     * @param {Block} block
+     * @prop {Block} block
      */
     addBlock(block) {
         this.chain.push(block);
@@ -56,7 +59,7 @@ module.exports = class Blockchain {
      * Given a miner address, attempt to mine the pending transactions and adding a block to the blockchain.
      * This generates a new pending transaction rewarding the miner for their work.
      *
-     * @param {String} miningRewardAddress
+     * @prop {String} miningRewardAddress
      */
     minePendingTransactions(miningRewardAddress) {
         let block = new Block(Date.now(), this.pendingTransactions, this.getLatestBlock().hash);
@@ -70,7 +73,7 @@ module.exports = class Blockchain {
     /**
      * Append a new Transaction to the list of pending transactions to be mined next.
      *
-     * @param {Transaction} transaction
+     * @prop {Transaction} transaction
      */
     createTransaction(transaction) {
         this.pendingTransactions.push(transaction);
@@ -80,7 +83,7 @@ module.exports = class Blockchain {
      * Calculate the balance of a given address by traversing all of the transactions
      * associated with the given address
      *
-     * @param {String} address the public address in question
+     * @prop {String} address the public address in question
      * @return {String} the balance of a given address
      */
     getBalanceOfAddress(address) {

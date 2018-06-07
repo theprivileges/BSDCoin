@@ -1,11 +1,15 @@
 const crypto = require('crypto');
 
+/**
+ * @export
+ * @class Block
+ */
 module.exports = class Block {
     /**
      * Create a Block
-     * @param {Date} timestamp The time approximate creation time of this Block
-     * @param {Array} transactions List of Transactions stored in this Block
-     * @param {String} previousHash A reference to the hash of the previous (parent) block in the chain
+     * @param {String} [timestamp=Date.now()] The time approximate creation time of this Block
+     * @param {Array.<Transaction>} [transactions=[]] List of Transactions stored in this Block
+     * @param {String} [previousHash=''] A reference to the hash of the previous (parent) block in the chain
      */
     constructor(timestamp = Date.now(), transactions = [], previousHash = '') {
         this.previousHash = previousHash.toString();
@@ -35,7 +39,7 @@ module.exports = class Block {
      */
     mineBlock(difficulty) {
         console.time('Mining Block');
-        const target = Array(difficulty + 1).join('0');
+        const target = String('0').repeat(difficulty);
         // While the hash does not begin with the specified leading zeroes, keep trying
         while (this.hash.substring(0, difficulty) !== target) {
             this.nonce = this.generateNonce();
