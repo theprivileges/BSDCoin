@@ -71,7 +71,7 @@ module.exports = class Block {
     /**
      * Get the list of transactions in this block
      *
-     * @return {Array}
+     * @return {Array.<Transaction>}
      */
     getTransactions() {
         return this.transactions;
