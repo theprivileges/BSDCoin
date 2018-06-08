@@ -41,7 +41,7 @@ module.exports = class Blockchain {
     /**
      * Push a new Block onto the end of the Blockchain
      *
-     * @prop {Block} block
+     * @param {Block} block
      */
     addBlock(block) {
         this.chain.push(block);
@@ -59,7 +59,7 @@ module.exports = class Blockchain {
      * Given a miner address, attempt to mine the pending transactions and adding a block to the blockchain.
      * This generates a new pending transaction rewarding the miner for their work.
      *
-     * @prop {String} miningRewardAddress
+     * @param {String} miningRewardAddress
      */
     minePendingTransactions(miningRewardAddress) {
         let block = new Block(Date.now(), this.pendingTransactions, this.getLatestBlock().hash);
@@ -73,7 +73,7 @@ module.exports = class Blockchain {
     /**
      * Append a new Transaction to the list of pending transactions to be mined next.
      *
-     * @prop {Transaction} transaction
+     * @param {Transaction} transaction
      */
     createTransaction(transaction) {
         this.pendingTransactions.push(transaction);
@@ -83,7 +83,7 @@ module.exports = class Blockchain {
      * Calculate the balance of a given address by traversing all of the transactions
      * associated with the given address
      *
-     * @prop {String} address the public address in question
+     * @param {String} address the public address in question
      * @return {String} the balance of a given address
      */
     getBalanceOfAddress(address) {

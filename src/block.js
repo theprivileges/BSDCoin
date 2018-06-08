@@ -52,7 +52,7 @@ module.exports = class Block {
     /**
      * Generate a random value so that the hash of the block will contain a run of leading zeroes.
      *
-     * @param {Number} length (optional) the bit size of the nonce
+     * @param {Number} [length=32] (optional) the bit size of the nonce
      * @return {String}
      */
     generateNonce(length = 32) {
