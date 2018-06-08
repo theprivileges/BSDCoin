@@ -1,0 +1,25 @@
+{
+    "workbench.colorTheme": "Github",
+    "workbench.colorCustomizations": {
+      "editorCursor.background": "#ffffff",
+      "editorCursor.foreground": "#0000bb",
+      "editor.lineHighlightBackground": "#f0f0f0",
+      "editor.selectionBackground": "#aaeeff"
+    },
+    "workbench.statusBar.visible": false,
+    "workbench.activityBar.visible": false,
+    "explorer.openEditors.visible": 0,
+    "editor.minimap.enabled": false,
+    "editor.renderWhitespace": "none",
+    "editor.renderIndentGuides": false,
+    "editor.fontFamily": "SFMono-Regular",
+    "editor.fontWeight": "600",
+    "editor.fontSize": 22,
+    "terminal.integrated.fontFamily": "Source Code Pro",
+    "terminal.integrated.fontWeight": "600",
+    "terminal.integrated.fontSize": 22,
+    "terminal.integrated.shell.osx": "/bin/bash",
+    "editor.formatOnSave": false,
+    "markdown.preview.fontFamily": "\"-apple-system,BlinkMacSystemFont,\",Segoe UI\",Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\",\"Segoe UI Symbol\"",
+    "markdown.preview.fontSize": 24
+  }
