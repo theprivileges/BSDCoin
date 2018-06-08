@@ -15,9 +15,6 @@ const bob = crypto.createECDH('secp256k1');
 bob.generateKeys();
 const bobAddress = bob.getPublicKey('hex');
 
-/**
- * @var {Blockchain}
- */
 const bsdCoin = new Blockchain();
 
 // A miner joins the network
@@ -39,4 +36,4 @@ const aliceBalance = bsdCoin.getBalanceOfAddress(aliceAddress);
 console.log('Balance of miner\'s wallet is', minerBalance);
 console.log('Balance of bob\'s wallet is', bobBalance);
 console.log('Balance of alice\'s wallet is', aliceBalance);
-// console.log('Blockchain', JSON.stringify(bsdCoin, null, 2));
+console.log('Blockchain', JSON.stringify(bsdCoin.chain, null, 2));
