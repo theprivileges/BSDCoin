@@ -12,7 +12,9 @@ const bob = crypto.createECDH('secp256k1');
 bob.generateKeys();
 const bobAddress = bob.getPublicKey('hex');
 
+const difficulty = 3;
 const bsdCoin = new Blockchain();
+// bsdCoin.difficulty = difficulty;
 
 bsdCoin.minePendingTransactions(minerAddress);
 bsdCoin.createTransaction(new Transaction(minerAddress, bobAddress, 100));
@@ -35,12 +37,16 @@ rogueBlock.hash = rogueBlock.calculateHash();
 
 // => How long to change an old block?
 console.time('Tempering');
-for (let i = 1; i < bsdCoin.chain.length; i++) {
+for (let i = 2; i < bsdCoin.chain.length; i++) {
     const currBlock = bsdCoin.chain[i];
     const prevBlock = bsdCoin.chain[i - 1];
 
+    // set previousHash
     currBlock.previousHash = prevBlock.hash;
+    // set hash to new hash
     currBlock.hash = currBlock.calculateHash();
+    // mine block so it meets target
+    currBlock.mineBlock(difficulty)
 }
 console.timeEnd('Tempering');
 

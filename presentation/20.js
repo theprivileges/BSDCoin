@@ -1,5 +1,5 @@
-const Block = require('../block');
-const Transaction = require('../transaction');
+const Block = require('../src/block');
+const Transaction = require('../src/transaction');
 
 class Blockchain {
     constructor() {
@@ -43,7 +43,7 @@ class Blockchain {
      * associated with the given address
      *
      * @param {String} address the public address in question
-     * @return {String} the balance of a given address
+     * @return {Number} the balance of a given address
      */
     getBalanceOfAddress(address) {
         let balance = 0;
